@@ -2,8 +2,6 @@
  * Created by kylem on 6/7/2017.
  */
 
-var Math = require('mathjs');
-
 function sigmoid(x, deriv = false) {
     if (deriv) {
         return x * (1 - x);
@@ -24,4 +22,8 @@ function reLU(x) {
     } else {
         return x * 0.01;
     }
+}
+
+function changeActivationFunction(x){
+    activationFunction = x;
 }
