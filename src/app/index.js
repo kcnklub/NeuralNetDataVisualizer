@@ -100,29 +100,35 @@ var test = new NeuralNet(testSet, 0, testOut);
 
 
 function dotProduct(A, B){
-    var colsA = A[0].length;
-    var rowsB = B.length;
-    if(colsA != rowsB){
-        console.error("dimensions are fucked");
+    var rowsA = A[0].length;
+    var colsB = B.length;
+    var rowsB = B[0].length;
+    if(!(rowsA == colsB)){
+        console.log("The Dimensions of your Matrices are off. ");
         return null;
     }else{
-        var newMatrix = [[],[]]; // new array
-        for(let i = 0; i < A.length; i++){
-            for (let j = 0; j < B[0].length; j++){
-                var newRow = [];
-                for(let l = 0; l < A.length; l++){
-                    newRow.push(A[i][l] * B[l][j] + A[i][l] * B[l][j]);
+        var result = Array(rowsA);
+        var tempRow = Array(colsB);
+        var sum = 0;
+        for(var i = 0; i < rowsA; i++){
+
+            for(var j = 0; j < rowsB; j++){
+                for(var k = 0; k < colsB; k++){
+                    sum += (A[i][k] * B[k][j]);
                 }
+                tempRow[j] = sum;
+                sum = 0;
             }
-            newMatrix.push(newRow);
+            result[i] = (tempRow);
+            tempRow = [];
         }
-        return newMatrix;
+        return result;
     }
 }
 
 var test1 = [[1,2], [1,2]];
-var test2 = [[1,2], [1,2]];
+var test2 = [[1,2,3], [1,2,3]];
 
-dotProduct(test1, test2).forEach(function(item, index, array){
-    console.log(item);
-})
+var result = dotProduct(test1, test2);
+
+console.log(result);
