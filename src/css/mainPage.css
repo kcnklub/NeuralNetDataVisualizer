@@ -1,0 +1,28 @@
+body {
+}
+h1 {
+    font-size: 4em;
+}
+#body {
+    background-color: white;
+}
+#NetHeader {
+    text-align: center;
+}
+
+#description {
+    font-size: large;
+    align-content: center;
+}
+
+#headerPicture {
+    height: 100%;
+}
+
+#controlButton {
+    margin: 25px;
+}
+#Layer {
+    text-align: center;
+}
+

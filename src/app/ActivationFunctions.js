@@ -27,3 +27,4 @@ function reLU(x) {
 function changeActivationFunction(x){
     activationFunction = x;
 }
+
