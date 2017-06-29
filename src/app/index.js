@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
-import Math from "mathjs";
+
+import Footer from "./Footer";
 
 import "../css/mainPage.css"
 
@@ -16,11 +17,11 @@ class Graph extends React.Component {
                     <h4>Input Layer</h4>
                     <br />
                     <br />
-                    <div>1</div>
+                    <div>{this.props.inputLayer[0]}</div>
                     <br />
-                    <div>2</div>
+                    <div>{this.props.inputLayer[1]}</div>
                     <br />
-                    <div>3</div>
+                    <div>{this.props.inputLayer[2]}</div>
                 </div>
                 <div id="Layer" className="col-md-4">
                     <h4>Hidden Layer</h4>
@@ -69,7 +70,7 @@ class Visualizer extends React.Component {
                         <button id="controlButton" onClick={changeActivationFunction(1)}>tanh</button>
                         <button id="controlButton" onClick={changeActivationFunction(2)}>reLU</button>
                     </div>
-                    <Graph />
+                    <Graph inputLayer={[2, 2, 3]} hiddenLayer={[1, 2, 3, 4]} />
                 </div>
 
             </div>
@@ -78,3 +79,4 @@ class Visualizer extends React.Component {
 }
 
 render(<Visualizer />, document.getElementById("Visualizer"));
+render(<Footer test="this is the test" />, document.getElementById("Footer"));
