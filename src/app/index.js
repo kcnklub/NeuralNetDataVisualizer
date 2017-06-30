@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 
 import Footer from "./Footer";
+import NeuralNet from "./NeuralNet";
 
 import "../css/mainPage.css"
 
@@ -66,9 +67,9 @@ class Visualizer extends React.Component {
 
                     <div id="NetHeader" className="col-md-6">
                         <h3>Activation Functions</h3>
-                        <button id="controlButton" onClick={changeActivationFunction(0)}>sigmoid</button>
-                        <button id="controlButton" onClick={changeActivationFunction(1)}>tanh</button>
-                        <button id="controlButton" onClick={changeActivationFunction(2)}>reLU</button>
+                        <button id="controlButton">sigmoid</button>
+                        <button id="controlButton">tanh</button>
+                        <button id="controlButton">reLU</button>
                     </div>
                     <Graph inputLayer={[2, 2, 3]} hiddenLayer={[1, 2, 3, 4]} />
                 </div>
@@ -80,3 +81,26 @@ class Visualizer extends React.Component {
 
 render(<Visualizer />, document.getElementById("Visualizer"));
 render(<Footer test="this is the test" />, document.getElementById("Footer"));
+
+////////////////////////////////////////////////////////////////////////////////////////
+// testing neural network.
+
+let input = [
+    [0, 0, 1],
+    [0, 1, 1],
+    [1, 0, 1],
+    [1, 1, 1]
+];
+
+let output = [
+    [0],
+    [0],
+    [1],
+    [1]
+]
+
+var TestNetwork = new NeuralNet(input, 0, output);
+TestNetwork.feedForward();
+TestNetwork.calcError();
+
+
