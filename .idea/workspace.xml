@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17c4476d-74cc-47cf-bf4a-33cb6d936407" name="Default" comment="I have created the git ignore file. should have done that earlier. &#10;&#10;Other than that the neural network works in the browswer time to make it interactive. &#10;&#10;Everything should be tested.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="17c4476d-74cc-47cf-bf4a-33cb6d936407" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app/bundle.js" afterPath="$PROJECT_DIR$/dist/app/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/NeuralNet.js" afterPath="$PROJECT_DIR$/src/app/NeuralNet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/index.js" afterPath="$PROJECT_DIR$/src/app/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,6 +69,11 @@
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -616,7 +617,7 @@
       <workItem from="1498626654491" duration="476000" />
       <workItem from="1498755712420" duration="54000" />
       <workItem from="1498839783729" duration="8683000" />
-      <workItem from="1498866741690" duration="471000" />
+      <workItem from="1498866741690" duration="516000" />
     </task>
     <task id="LOCAL-00001" summary="I have forgot everything that I worked on. It is everything that I did while over at slades. &#10;&#10;-Trying to make a dot product function for the network. &#10;-requires math.js">
       <created>1498150615476</created>
@@ -632,11 +633,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498755750715</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="I have created the git ignore file. should have done that earlier. &#10;&#10;Other than that the neural network works in the browswer time to make it interactive. &#10;&#10;Everything should be tested.">
+      <created>1498867229670</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1498867229670</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72987000" />
+    <option name="totallyTimeSpent" value="73032000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -735,6 +743,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -750,6 +764,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="45" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -779,6 +799,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -816,6 +842,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -853,6 +885,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -890,6 +928,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -919,6 +963,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1021,6 +1071,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="38" column="4" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
+          <folding>
+            <element signature="e#675#681#0" expanded="false" />
+            <element signature="e#681#687#0" expanded="false" />
+            <element signature="e#1184#1190#0" expanded="false" />
+            <element signature="e#1190#1196#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
