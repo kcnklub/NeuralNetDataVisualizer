@@ -27,13 +27,13 @@ class Graph extends React.Component {
                 <div id="Layer" className="col-md-4">
                     <h4>Hidden Layer</h4>
                     <br />
-                    <div>1</div>
+                    <div>{this.props.hiddenLayer[0]}</div>
                     <br />
-                    <div>2</div>
+                    <div>{this.props.hiddenLayer[1]}</div>
                     <br />
-                    <div>3</div>
+                    <div>{this.props.hiddenLayer[2]}</div>
                     <br />
-                    <div>4</div>
+                    <div>{this.props.hiddenLayer[3]}</div>
                 </div>
                 <div id="Layer" className="col-md-3">
                     <h4>Output Layer</h4>
@@ -41,7 +41,7 @@ class Graph extends React.Component {
                     <br />
                     <br />
                     <br />
-                    <div>1</div>
+                    <div>{this.props.outputLayer[0]}</div>
                 </div>
                 <div className="col-md-1"></div>
             </div>
@@ -71,7 +71,7 @@ class Visualizer extends React.Component {
                         <button id="controlButton">tanh</button>
                         <button id="controlButton">reLU</button>
                     </div>
-                    <Graph inputLayer={[2, 2, 3]} hiddenLayer={[1, 2, 3, 4]} />
+                    <Graph inputLayer={TestNetwork.inputLayer} hiddenLayer={TestNetwork.hiddenLayer} outputLayer={TestNetwork.outputLayer}/>
                 </div>
 
             </div>

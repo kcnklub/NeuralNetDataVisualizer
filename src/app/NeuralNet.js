@@ -49,18 +49,6 @@
                 this.outputLayer[i][j] = sigmoid(this.outputLayer[i][j]);
             }
         }
-        /*
-        console.log("input layer");
-        console.log(this.inputLayer);
-        console.log("syn0");
-        console.log(this.syn0);
-        console.log("hidden layer");
-        console.log(this.hiddenLayer);
-        console.log("syn1");
-        console.log(this.syn1);
-        console.log("output layer");
-        console.log(this.outputLayer);
-        console.log("//////////////////////////////////////////////////////"); */
     }
 
     calcError(){
