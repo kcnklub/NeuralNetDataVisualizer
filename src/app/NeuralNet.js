@@ -2,6 +2,17 @@
  * Created by Kyle on 6/23/2017.
  */
  export default class NeuralNet {
+
+
+    inputLayer;
+    hiddenLayer;
+    outputLayer;
+    syn0;
+    syn1;
+    l2_error;
+    l1_error;
+    l2_delta;
+    l1_delta;
     constructor(input, activationFunction, expectedOutput){
         this.inputLayer = input;
         this.syn0 = [
@@ -30,7 +41,6 @@
                 this.hiddenLayer[i][j] = sigmoid(this.hiddenLayer[i][j]);
             }
         }
-        console.log(this.hiddenLayer);
 
         // feed into the output layer
         this.outputLayer = dotProduct(this.hiddenLayer, this.syn1);
@@ -39,7 +49,18 @@
                 this.outputLayer[i][j] = sigmoid(this.outputLayer[i][j]);
             }
         }
+        /*
+        console.log("input layer");
+        console.log(this.inputLayer);
+        console.log("syn0");
+        console.log(this.syn0);
+        console.log("hidden layer");
+        console.log(this.hiddenLayer);
+        console.log("syn1");
+        console.log(this.syn1);
+        console.log("output layer");
         console.log(this.outputLayer);
+        console.log("//////////////////////////////////////////////////////"); */
     }
 
     calcError(){
@@ -49,64 +70,70 @@
                 this.l2_error[i][j] = this.expectedOutput[i][j] - this.outputLayer[i][j];
             }
         }
-        console.log("l2_error");
-        console.log(this.l2_error);
-
-        console.log(this.outputLayer)
-
 
         this.outputDeriv = [[],[],[],[]];
-        for(let i = 0; i < this.outputLayer.length; i++){
-            for(let j = 0; j < this.outputLayer[i].length; j++){
-                this.outputDeriv[i][j] = sigmoid(this.outputLayer[i][j], true);
-            }
-        }
         this.l2_delta = [[],[],[],[]];
         for(let i = 0; i < this.outputLayer.length; i++){
             for(let j = 0; j < this.outputLayer[i].length; j++){
+                this.outputDeriv[i][j] = sigmoid(this.outputLayer[i][j], true);
                 this.l2_delta[i][j] = this.l2_error[i][j] * this.outputDeriv[i][j];
             }
         }
-        //this.l2_delta = this.l2_error * sigmoid(this.outputLayer, true);
-        //this.l1_error = Math.dotMultiply(this.l2_delta, this.syn1);
-        //this.l1_delta = this.l1_error * sigmoid(this.hiddenLayer, true);
+
+        this.l1_error = dotProduct(this.l2_delta, transposeMat(this.syn1));
+        this.hiddenDeriv = [[],[],[],[]];
+        this.l1_delta = [[],[],[],[]];
+        for(let i = 0; i < this.hiddenLayer.length; i++){
+            for(let j = 0; j < this.hiddenLayer[i].length; j++){
+                this.hiddenDeriv[i][j] = sigmoid(this.hiddenLayer[i][j], true);
+                this.l1_delta[i][j] = this.l1_error[i][j] * this.hiddenDeriv[i][j];
+            }
+        }
     }
 
     updateWeights(){
-        this.syn1 += Math.dotMultiply(this.l2_delta, this.hiddenLayer);
-        this.syn0 += Math.dotMultiply(this.l1_delta, this.inputLayer);
+
+
+        this.deltaSyn1 = dotProduct(transposeMat(this.l2_delta), this.hiddenLayer);
+        this.deltaSyn0 = dotProduct(transposeMat(this.l1_delta), this.inputLayer);
+        this.deltaSyn1 = transposeMat(this.deltaSyn1);
+        this.deltaSyn0 = transposeMat(this.deltaSyn0);
+        for( let i = 0; i < this.syn1.length; i++){
+            for ( let j = 0; j < this.syn1[i].length; j++){
+                this.syn1[i][j] += this.deltaSyn1[i][j];
+            }
+        }
+
+        for (let i = 0; i < this.syn0.length; i++){
+            for ( let j = 0; j < this.syn0[i].length; j++){
+                this.syn0[i][j] += this.deltaSyn0[i][j];
+            }
+        }
     }
 
     train(){
-        for(let i = 0; i < 60000; i++){
-            console.log("we are starting the training");
+        for(let i = 0; i < 1000; i++){
             this.feedForward();
-            console.log("we are bout to calc error");
             this.calcError();
-            if((i % 10000) === 0)
-                console.log(this.l2_error);
             this.updateWeights();
+            console.log(this.outputLayer);
         }
     }
 }
 
 
 function dotProduct(A, B){
-    let rowsA = A.length
-    let colsA = A[0].length;
-    let rowsB = B.length;
-    let colsB = B[0].length;
-    if(!(colsA === rowsB)){
+    if(!(A[0].length === B.length)){
         console.log("The Dimensions of your Matrices are off. ");
         return null;
     }else{
         let result = [];
         let tempRow = [];
         let sum = 0;
-        for(let i = 0; i < rowsA; i++){
+        for(let i = 0; i < A.length; i++){
 
-            for(let j = 0; j < colsB; j++){
-                for(let k = 0; k < rowsB; k++){
+            for(let j = 0; j < B[0].length; j++){
+                for(let k = 0; k < B.length; k++){
                     sum += (A[i][k] * B[k][j]);
                 }
                 tempRow.push(sum);
@@ -117,6 +144,21 @@ function dotProduct(A, B){
         }
         return result;
     }
+}
+
+function transposeMat(A){
+    let row = A.length;
+    let col = A[0].length;
+    let result = [];
+    let tempRow = [];
+    for(let j = 0; j < col; j++){
+        for(let i = 0; i < row; i++){
+            tempRow.push(A[i][j])
+        }
+        result.push(tempRow);
+        tempRow = []
+    }
+    return result;
 }
 
 function sigmoid(x, deriv = false) {

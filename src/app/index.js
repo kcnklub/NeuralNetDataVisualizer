@@ -100,7 +100,6 @@ let output = [
 ]
 
 var TestNetwork = new NeuralNet(input, 0, output);
-TestNetwork.feedForward();
-TestNetwork.calcError();
+TestNetwork.train();
 
 
