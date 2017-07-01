@@ -1,4 +1,5 @@
 
+.idea/*
 node_modules/.bin/browserslist
 node_modules/.bin/browserslist.cmd
 node_modules/.bin/cssesc
@@ -113,3 +114,4 @@ node_modules/uniqid/
 node_modules/uniqs/
 node_modules/vendors/
 node_modules/whet.extend/
+node_modules/postcss/
