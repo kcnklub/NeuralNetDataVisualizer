@@ -26,6 +26,13 @@
             [Math.random()],
             [Math.random()]
         ];
+        this.hiddenLayer = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ];
+        this.outputLayer = [[0],[0],[0],[0]];
         this.activationFucntion = activationFunction;
         //0 -> sig
         //1 -> tanh
