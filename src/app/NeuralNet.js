@@ -109,7 +109,6 @@
             this.feedForward();
             this.calcError();
             this.updateWeights();
-            console.log(this.outputLayer);
         }
     }
 
