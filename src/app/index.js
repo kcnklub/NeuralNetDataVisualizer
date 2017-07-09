@@ -30,6 +30,7 @@ class Visualizer extends React.Component {
             syn1: this.neuralNetwork.syn1,
             outputLayer: this.neuralNetwork.outputLayer,
             error: [[0],[0],[0],[0]],
+            delta: [[0],[0],[0],[0]],
             stepInProcess: 0,
             actImage: "Sigmoid"
         }
@@ -42,16 +43,16 @@ class Visualizer extends React.Component {
         this.setState({syn1: this.neuralNetwork.syn1});
         this.setState({outputLayer: this.neuralNetwork.outputLayer});
         this.setState({error: this.neuralNetwork.l2_error});
+        this.setState({delta: this.neuralNetwork.l2_delta});
     }
 
     handleActivationChange(x){
-        this.neuralNetwork.changeActivation(x);
+        this.handleReset(x);
+        this.setState({actFunction: x});
         if(x === 0){
             this.setState({actImage: "Sigmoid"});
         } else if (x === 1) {
             this.setState({actImage: "tanh"});
-        } else if (x === 2) {
-            this.setState({actImage: "reLU"});
         }
     }
 
@@ -65,6 +66,7 @@ class Visualizer extends React.Component {
             this.neuralNetwork.calcError();
             this.setState({stepInProcess: 2});
             this.setState({error: this.neuralNetwork.l2_error});
+            this.setState({delta: this.neuralNetwork.l2_delta});
         } else {
             this.neuralNetwork.updateWeights();
             this.setState({syn0: this.neuralNetwork.syn0});
@@ -73,14 +75,16 @@ class Visualizer extends React.Component {
         }
     }
 
-    handleReset(){
+    handleReset(x){
         delete this.neuralNetwork;
-        this.neuralNetwork = new NeuralNet(this.input, 0, this.output);
+        this.neuralNetwork = new NeuralNet(this.input, x, this.output);
         this.setState({hiddenLayer: this.neuralNetwork.hiddenLayer});
         this.setState({syn0: this.neuralNetwork.syn0});
         this.setState({syn1: this.neuralNetwork.syn1});
         this.setState({outputLayer: this.neuralNetwork.outputLayer});
-        this.setState({error: [[0],[0],[0],[0]]})
+        this.setState({error: [[0],[0],[0],[0]]});
+        this.setState({stepInProcess: 0});
+        this.setState({delta: [[0],[0],[0],[0]]});
     }
 
     render(){
@@ -92,7 +96,7 @@ class Visualizer extends React.Component {
                         <h3>Controls</h3>
                         <button id="controlButton" onClick={ () => this.handleStepingThruNetwork()}>Step</button>
                         <button id="controlButton" onClick={ () => this.runNet()}>Run</button>
-                        <button id="controlButton" onClick={ () => this.handleReset()}>Reset</button>
+                        <button id="controlButton" onClick={ () => this.handleReset(this.state.actFunction)}>Reset</button>
                     </div>
 
                     <div className="col-md-4">
@@ -105,7 +109,6 @@ class Visualizer extends React.Component {
                         <h3>Activation Functions</h3>
                         <button id="controlButton" onClick={() => this.handleActivationChange(0)} >sigmoid</button>
                         <button id="controlButton" onClick={() => this.handleActivationChange(1)} >tanh</button>
-                        <button id="controlButton" onClick={() => this.handleActivationChange(2)} >reLU</button>
                     </div>
                 </div>
 
@@ -180,7 +183,11 @@ class Visualizer extends React.Component {
                     </div>
                     <div id="errorRow" className="row">
                         <h4>Error</h4>
-                        <div>{(this.state.error[0][0] * 100).toFixed(3)}%, {(this.state.error[1][0] * 100).toFixed(3)}%, {(this.state.error[2][0] * 100).toFixed(3)}%, {(this.state.error[3][0] * 100).toFixed(3)}%</div>
+                        <div>{Math.abs((this.state.error[0][0] * 100)).toFixed(3)}%, {Math.abs((this.state.error[1][0] * 100)).toFixed(3)}%, {Math.abs((this.state.error[2][0] * 100)).toFixed(3)}%, {Math.abs((this.state.error[3][0] * 100)).toFixed(3)}%</div>
+                    </div>
+                    <div id="errorRow" className="row">
+                        <h4>Delta</h4>
+                        <div>{Math.abs((this.state.delta[0][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[1][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[2][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[3][0] * 100)).toFixed(3)}%</div>
                     </div>
                 </div>
 

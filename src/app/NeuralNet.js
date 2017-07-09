@@ -14,15 +14,15 @@
     constructor(input, activationFunction, expectedOutput){
         this.inputLayer = input;
         this.syn0 = [
-            [Math.random(), Math.random(), Math.random(), Math.random()],
-            [Math.random(), Math.random(), Math.random(), Math.random()],
-            [Math.random(), Math.random(), Math.random(), Math.random()]
+            [2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1],
+            [2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1],
+            [2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1, 2 * Math.random() - 1]
         ];
         this.syn1 = [
-            [Math.random()],
-            [Math.random()],
-            [Math.random()],
-            [Math.random()]
+            [2 * Math.random() - 1],
+            [2 * Math.random() - 1],
+            [2 * Math.random() - 1],
+            [2 * Math.random() - 1]
         ];
         this.hiddenLayer = [
             [0, 0, 0, 0],
@@ -34,24 +34,31 @@
         this.activationFucntion = activationFunction;
         //0 -> sig
         //1 -> tanh
-        //2 -> reLU
         this.expectedOutput = expectedOutput;
     }
 
     feedForward(){
         //this is the process of feeding the data forward from input to the output of the graph.
-        this.hiddenLayer = this.dotProduct(this.inputLayer, this.syn0);
+        this.hiddenLayer = NeuralNet.dotProduct(this.inputLayer, this.syn0);
         for (let i = 0; i < this.hiddenLayer.length; i++){
             for (let j = 0; j < this.hiddenLayer[i].length; j ++){
-                this.hiddenLayer[i][j] = this.sigmoid(this.hiddenLayer[i][j]);
+                if(this.activationFucntion === 0){
+                    this.hiddenLayer[i][j] = NeuralNet.sigmoid(this.hiddenLayer[i][j]);
+                }else if(this.activationFucntion === 1){
+                    this.hiddenLayer[i][j] = NeuralNet.tanh(this.hiddenLayer[i][j]);
+                }
             }
         }
 
         // feed into the output layer
-        this.outputLayer = this.dotProduct(this.hiddenLayer, this.syn1);
+        this.outputLayer = NeuralNet.dotProduct(this.hiddenLayer, this.syn1);
         for (let i = 0; i < this.outputLayer.length; i++){
             for (let j = 0; j < this.outputLayer[i].length; j ++){
-                this.outputLayer[i][j] = this.sigmoid(this.outputLayer[i][j]);
+                if(this.activationFucntion === 0){
+                    this.outputLayer[i][j] = NeuralNet.sigmoid(this.outputLayer[i][j]);
+                }else if(this.activationFucntion === 1){
+                    this.outputLayer[i][j] = NeuralNet.tanh(this.outputLayer[i][j]);
+                }
             }
         }
     }
@@ -68,35 +75,40 @@
         this.l2_delta = [[],[],[],[]];
         for(let i = 0; i < this.outputLayer.length; i++){
             for(let j = 0; j < this.outputLayer[i].length; j++){
-                this.outputDeriv[i][j] = this.sigmoid(this.outputLayer[i][j], true);
+                if(this.activationFucntion === 0){
+                    this.outputDeriv[i][j] = NeuralNet.sigmoid(this.outputLayer[i][j], true);
+                }else if(this.activationFucntion === 1){
+                    this.outputDeriv[i][j] = NeuralNet.tanh(this.outputLayer[i][j], true);
+                }
                 this.l2_delta[i][j] = this.l2_error[i][j] * this.outputDeriv[i][j];
             }
         }
 
-        this.l1_error = this.dotProduct(this.l2_delta, this.transposeMat(this.syn1));
+        this.l1_error = NeuralNet.dotProduct(this.l2_delta, NeuralNet.transposeMat(this.syn1));
         this.hiddenDeriv = [[],[],[],[]];
         this.l1_delta = [[],[],[],[]];
         for(let i = 0; i < this.hiddenLayer.length; i++){
             for(let j = 0; j < this.hiddenLayer[i].length; j++){
-                this.hiddenDeriv[i][j] = this.sigmoid(this.hiddenLayer[i][j], true);
+                if(this.activationFucntion === 0){
+                    this.hiddenDeriv[i][j] = NeuralNet.sigmoid(this.hiddenLayer[i][j], true);
+                }else if(this.activationFucntion === 1){
+                    this.hiddenDeriv[i][j] = NeuralNet.tanh(this.hiddenLayer[i][j], true);
+                }
                 this.l1_delta[i][j] = this.l1_error[i][j] * this.hiddenDeriv[i][j];
             }
         }
     }
 
     updateWeights(){
-
-
-        this.deltaSyn1 = this.dotProduct(this.transposeMat(this.l2_delta), this.hiddenLayer);
-        this.deltaSyn0 = this.dotProduct(this.transposeMat(this.l1_delta), this.inputLayer);
-        this.deltaSyn1 = this.transposeMat(this.deltaSyn1);
-        this.deltaSyn0 = this.transposeMat(this.deltaSyn0);
+        this.deltaSyn1 = NeuralNet.dotProduct(NeuralNet.transposeMat(this.l2_delta), this.hiddenLayer);
+        this.deltaSyn0 = NeuralNet.dotProduct(NeuralNet.transposeMat(this.l1_delta), this.inputLayer);
+        this.deltaSyn1 = NeuralNet.transposeMat(this.deltaSyn1);
+        this.deltaSyn0 = NeuralNet.transposeMat(this.deltaSyn0);
         for( let i = 0; i < this.syn1.length; i++){
             for ( let j = 0; j < this.syn1[i].length; j++){
                 this.syn1[i][j] += this.deltaSyn1[i][j];
             }
         }
-
         for (let i = 0; i < this.syn0.length; i++){
             for ( let j = 0; j < this.syn0[i].length; j++){
                 this.syn0[i][j] += this.deltaSyn0[i][j];
@@ -112,13 +124,8 @@
         }
     }
 
-    changeActivation(x){
-        this.activationFucntion = x;
-    }
-
-    dotProduct(A, B){
+    static dotProduct(A, B){
         if(!(A[0].length === B.length)){
-            console.log("The Dimensions of your Matrices are off. ");
             return null;
         }else{
             let result = [];
@@ -139,7 +146,7 @@
             return result;
         }
     }
-    transposeMat(A){
+    static transposeMat(A){
         let row = A.length;
         let col = A[0].length;
         let result = [];
@@ -154,26 +161,17 @@
         return result;
     }
 
-    sigmoid(x, deriv = false) {
+    static sigmoid(x, deriv = false) {
         if (deriv) {
             return x * (1 - x);
         }
         return 1 / (1 + Math.exp(-x));
     }
 
-    tanh(x, deriv = false) {
+    static tanh(x, deriv = false) {
         if (deriv) {
-            return Math.acosh(1 / x) * Math.acosh(1 / x);
+            return Math.pow(1/(Math.cosh(x)), 2);
         }
         return Math.tanh(x);
     }
-
-    reLU(x) {
-        if (x > 0) {
-            return x;
-        } else {
-            return x * 0.01;
-        }
-    }
-
 }
