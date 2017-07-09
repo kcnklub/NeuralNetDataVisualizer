@@ -9,7 +9,6 @@ import "../css/mainPage.css"
 class Visualizer extends React.Component {
     constructor(props){
         super(props);
-
         this.input = [
             [0, 0, 1],
             [0, 1, 1],
@@ -23,7 +22,6 @@ class Visualizer extends React.Component {
             [1]
         ];
         this.neuralNetwork = new NeuralNet(this.input, 0, this.output);
-
         this.state = {
             hiddenLayer: this.neuralNetwork.hiddenLayer,
             syn0: this.neuralNetwork.syn0,
@@ -32,7 +30,8 @@ class Visualizer extends React.Component {
             error: [[0],[0],[0],[0]],
             delta: [[0],[0],[0],[0]],
             stepInProcess: 0,
-            actImage: "Sigmoid"
+            actImage: "Sigmoid",
+            actFunction: 0
         }
     }
 
@@ -190,8 +189,6 @@ class Visualizer extends React.Component {
                         <div>{Math.abs((this.state.delta[0][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[1][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[2][0] * 100)).toFixed(3)}%, {Math.abs((this.state.delta[3][0] * 100)).toFixed(3)}%</div>
                     </div>
                 </div>
-
-
         );
     }
 }
