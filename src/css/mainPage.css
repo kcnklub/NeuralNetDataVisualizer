@@ -16,13 +16,25 @@ h1 {
 }
 
 #headerPicture {
-    height: 100%;
 }
 
 #controlButton {
     margin: 25px;
 }
 #Layer {
+    text-align: center;
+}
+
+#actImage {
+}
+#imageContent {
+    text-align: center;
+}
+#conclusion {
+    text-align: center;
+}
+
+#errorRow {
     text-align: center;
 }
 
