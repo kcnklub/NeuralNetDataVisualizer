@@ -11,7 +11,15 @@ export default class Footer extends React.Component {
     render(){
         return(
             <div>
-                <h3>{this.props.test}</h3>
+                <h3>Contact Information</h3>
+                <h4>
+                    Created By: Kyle Miller
+                    &nbsp;&nbsp;
+                    <a href="https://github.com/kcnklub"><img id="gitLink" src="../images/Octocat.png"/></a>
+                    &nbsp;&nbsp;
+                    <a href="https://www.linkedin.com/in/kyle-miller-08876666/"><img src="../images/Logo-2C-34px-TM.png"/></a>
+                    &nbsp;&nbsp;
+                </h4>
             </div>
         );
     }
